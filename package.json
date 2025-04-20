@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
+    "test-no-watch": "vitest run",
     "prepare": "husky",
     "pre-commit": "lint-staged"
   },

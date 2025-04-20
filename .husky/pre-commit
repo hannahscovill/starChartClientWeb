@@ -1,2 +1,2 @@
-vitest run
+npm run test-no-watch
 npm run pre-commit

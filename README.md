@@ -1,54 +1,28 @@
-# React + TypeScript + Vite
+# Star Chart Client: Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Captures workouts you did so you can visualize all the stars you've earned on your calendar.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## CI/CD
+This repo uses github actions for CI/CD
 
-## Expanding the ESLint configuration
+### act
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The pipeline can be debugged locally with [act](https://nektosact.com/usage/index.html)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+brew install act
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Act doesn't seem to care about the `--platform` / `-p` flag you pass to it when you have an ~/.actrc. You can set it in the ~/.actrc:
+```
+-P ubuntu-latest=catthehacker/ubuntu:act-latest
+--container-daemon-socket -
+```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+If you don't want to configure giving `act` your docker credentials you can download the runner with `docker pull {image}` and run act with `--pull=false`
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+Most commonly used command to test the pipeline:
+```
+act push --pull=false
 ```
